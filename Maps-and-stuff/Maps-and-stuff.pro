@@ -17,8 +17,12 @@ CONFIG += sailfishapp
 QT += multimedia
 QT += positioning
 QT += location
+QT += core
 
 SOURCES += src/Maps-and-stuff.cpp \
+    file.cpp \
+    filelist.cpp \
+    filestorer.cpp \
     mapmark.cpp \
     marklist.cpp
 
@@ -50,5 +54,8 @@ CONFIG += sailfishapp_i18n
 TRANSLATIONS += translations/Maps-and-stuff-de.ts
 
 HEADERS += \
+    file.h \
+    filelist.h \
+    filestorer.h \
     mapmark.h \
     marklist.h

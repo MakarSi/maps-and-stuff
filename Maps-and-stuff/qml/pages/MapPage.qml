@@ -19,8 +19,6 @@ Page {
     Plugin {
         id: osmPlugin
         name: "osm"
-
-
         PluginParameter { name: "osm.mapping.host"; value: "https://tile.openstreetmap.org/" }
         PluginParameter { name: "osm.geocoding.host"; value: "https://nominatim.openstreetmap.org" }
         PluginParameter { name: "osm.routing.host"; value: "https://router.project-osrm.org/viaroute" }
