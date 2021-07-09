@@ -17,10 +17,12 @@ URL:        http://example.org/
 Source0:    %{name}-%{version}.tar.bz2
 Source100:  Maps-and-stuff.yaml
 Requires:   sailfishsilica-qt5 >= 0.10.9
-Requires:   qt5-multimedia
-Requires:   qt5-declarative-import-multimedia
+Requires:   qt5-qtmultimedia
+Requires:   qt5-qtdeclarative-import-multimedia
 Requires:   qt5-qtdeclarative-import-positioning
 Requires:   qt5-qtpositioning
+Requires:   qt5-qtdeclarative-import-location
+Requires:   qt5-plugin-geoservices-osm
 BuildRequires:  pkgconfig(sailfishapp) >= 1.0.2
 BuildRequires:  pkgconfig(Qt5Core)
 BuildRequires:  pkgconfig(Qt5Qml)

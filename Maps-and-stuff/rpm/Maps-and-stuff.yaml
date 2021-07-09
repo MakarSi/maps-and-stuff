@@ -31,10 +31,12 @@ PkgConfigBR:
 # Runtime dependencies which are not automatically detected
 Requires:
   - sailfishsilica-qt5 >= 0.10.9 
-  - qt5-multimedia
-  - qt5-declarative-import-multimedia
+  - qt5-qtmultimedia
+  - qt5-qtdeclarative-import-multimedia
   - qt5-qtdeclarative-import-positioning
   - qt5-qtpositioning
+  - qt5-qtdeclarative-import-location
+  - qt5-plugin-geoservices-osm
 
 # All installed files
 Files:

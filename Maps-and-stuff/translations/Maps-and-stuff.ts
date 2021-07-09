@@ -35,13 +35,6 @@
     </message>
 </context>
 <context>
-    <name>MapPage</name>
-    <message>
-        <source>Show marks list</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>SecondPage</name>
     <message>
         <source>Nested Page</source>

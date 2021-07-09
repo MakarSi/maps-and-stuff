@@ -16,6 +16,7 @@ CONFIG += sailfishapp
 
 QT += multimedia
 QT += positioning
+QT += location
 
 SOURCES += src/Maps-and-stuff.cpp \
     mapmark.cpp \
