@@ -24,16 +24,15 @@ SOURCES += src/Maps-and-stuff.cpp \
     filelist.cpp \
     filestorer.cpp \
     mapmark.cpp \
-    marklist.cpp
+    marklist.cpp \
+    markstorer.cpp
 
 DISTFILES += qml/Maps-and-stuff.qml \
     ../git_proj/maps-and-stuff/MyMap/qml/pages/ListPage.qml \
     ../git_proj/maps-and-stuff/MyMap/qml/pages/MapPage.qml \
     qml/cover/CoverPage.qml \
-    qml/pages/FirstPage.qml \
     qml/pages/ListPage.qml \
     qml/pages/MapPage.qml \
-    qml/pages/SecondPage.qml \
     rpm/Maps-and-stuff.changes.in \
     rpm/Maps-and-stuff.changes.run.in \
     rpm/Maps-and-stuff.spec \
@@ -58,4 +57,5 @@ HEADERS += \
     filelist.h \
     filestorer.h \
     mapmark.h \
-    marklist.h
+    marklist.h \
+    markstorer.h
