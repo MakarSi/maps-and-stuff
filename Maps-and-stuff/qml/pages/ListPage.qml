@@ -6,7 +6,7 @@ Page {
     id: listPage
     SilicaListView {
         anchors.fill: parent
-        header: PageHeader { title: qsTr("List Page") }
+        header: PageHeader { title: qsTr("List of marks") }
         delegate: ListItem {
             Label {
                 text: qsTr("Item %1").arg(model.index + 1)

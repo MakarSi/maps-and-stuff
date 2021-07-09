@@ -9,39 +9,13 @@
     </message>
 </context>
 <context>
-    <name>FirstPage</name>
-    <message>
-        <source>Show Page 2</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>UI Template</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Hello Sailors</source>
-        <translation type="unfinished"></translation>
-    </message>
-</context>
-<context>
     <name>ListPage</name>
-    <message>
-        <source>List Page</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <source>Item %1</source>
         <translation type="unfinished"></translation>
     </message>
-</context>
-<context>
-    <name>SecondPage</name>
     <message>
-        <source>Nested Page</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <source>Item</source>
+        <source>List of marks</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
