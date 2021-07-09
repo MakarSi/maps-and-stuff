@@ -31,6 +31,8 @@ DISTFILES += qml/Maps-and-stuff.qml \
     ../git_proj/maps-and-stuff/MyMap/qml/pages/ListPage.qml \
     ../git_proj/maps-and-stuff/MyMap/qml/pages/MapPage.qml \
     qml/cover/CoverPage.qml \
+    qml/pages/FileViewPage.qml \
+    qml/pages/FilesPage.qml \
     qml/pages/ListPage.qml \
     qml/pages/MapPage.qml \
     rpm/Maps-and-stuff.changes.in \

@@ -9,6 +9,28 @@
     </message>
 </context>
 <context>
+    <name>FileViewPage</name>
+    <message>
+        <source>File information</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File id:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>File path:</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>FilesPage</name>
+    <message>
+        <source>My Files</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
     <name>ListPage</name>
     <message>
         <source>Item %1</source>

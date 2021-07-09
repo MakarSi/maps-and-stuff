@@ -43,5 +43,21 @@ Page {
 
             onClicked: pageStack.push("ListPage.qml")
         }
+
+        Button {
+            anchors.left: parent.left
+            anchors.bottom: parent.bottom
+            Text{
+                anchors.centerIn: parent
+                font.pointSize: 40
+                font.bold: true
+                style: Text.Outline
+                styleColor: "white"
+                text: "Files list"
+                color: "black"
+            }
+
+            onClicked: pageStack.push("FilesPage.qml")
+        }
     }
 }

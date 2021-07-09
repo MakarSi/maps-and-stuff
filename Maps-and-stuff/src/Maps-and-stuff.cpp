@@ -1,7 +1,8 @@
 #ifdef QT_QML_DEBUG
-#include <QtQuick>
 #endif
+#include <QtQuick>
 #include <sailfishapp.h>
+#include "filelist.h"
 
 int main(int argc, char *argv[])
 {
@@ -15,5 +16,6 @@ int main(int argc, char *argv[])
     //
     // To display the view, call "show()" (will show fullscreen on device).
 
+    qmlRegisterType<FileList>("MyMap", 1, 0, "FileList");
     return SailfishApp::main(argc, argv);
 }

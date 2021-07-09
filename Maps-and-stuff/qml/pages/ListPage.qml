@@ -17,7 +17,7 @@ Page {
                            Theme.primaryColor
             }
         }
-        model: 100
+        model:
         VerticalScrollDecorator{}
     }
 }
