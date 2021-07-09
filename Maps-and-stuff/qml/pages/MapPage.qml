@@ -7,6 +7,14 @@ import ".."
 Page {
     id: pageMap
 
+    Location {
+        id: location
+        coordinate {
+            latitude: -27.5
+            longitude: 153.1
+        }
+    }
+
     PositionSource{
         active: true
         onPositionChanged: {
@@ -21,12 +29,22 @@ Page {
         PluginParameter {
         }
     }
+
     Map {
         id: map
         anchors.fill: parent
         plugin: osmPlugin
         center: QtPositioning.coordinate(59.91, 10.75)
         zoomLevel: 10
+
+        MouseArea{
+            anchors.fill: parent;
+            onClicked:{
+                console.log(mouseX, mouseY)
+                location.coordinate = map.toCoordinate(Qt.point(mouseX, mouseY), true)
+                console.log(location.coordinate)
+            }
+        }
 
         Button {
             anchors.right: parent.right
