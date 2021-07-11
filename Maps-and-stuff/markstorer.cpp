@@ -10,19 +10,19 @@
 #include "mapmark.h"
 
 namespace FSPrivate {
-QString formDataFilePath();
-void createDataPath();
+QString formDataMarkPath();
+void createDataMarkPath();
 
 QJsonObject convertMarkToJsonObject(MapMark &f);
 MapMark convertJsonObjectToMark(QJsonObject &jsonObject);
 };
 
-QString FSPrivate::formDataFilePath() {
+QString FSPrivate::formDataMarkPath() {
     QDir dataDir(QStandardPaths::writableLocation(QStandardPaths::AppDataLocation));
     return dataDir.absoluteFilePath(QStringLiteral("marks.json"));
 }
 
-void FSPrivate::createDataPath() {
+void FSPrivate::createDataMarkPath() {
     auto path = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
     QDir directoryCreator;
     directoryCreator.mkpath(path);
@@ -54,8 +54,8 @@ QJsonObject FSPrivate::convertMarkToJsonObject(MapMark &f) {
 
 QList<MapMark> MarkStorer::readMark() {
     QList<MapMark> marks;
-    qDebug() << "Data file path: " << FSPrivate::formDataFilePath();
-    QFile dataFile(FSPrivate::formDataFilePath());
+    qDebug() << "Data file path: " << FSPrivate::formDataMarkPath();
+    QFile dataFile(FSPrivate::formDataMarkPath());
     if(!dataFile.exists()) {
         // Data does not exists
         return marks;
@@ -90,8 +90,8 @@ void MarkStorer::storeMark(QList<MapMark> &m_marks) {
     }
     QJsonDocument jsonDocument;
     jsonDocument.setArray(jsonArray);
-    FSPrivate::createDataPath();
-    QFile dataFile(FSPrivate::formDataFilePath());
+    FSPrivate::createDataMarkPath();
+    QFile dataFile(FSPrivate::formDataMarkPath());
     dataFile.open(QFile::WriteOnly);
     dataFile.write(jsonDocument.toJson(QJsonDocument::Indented));
     dataFile.close();
