@@ -1,6 +1,6 @@
 #include "marklist.h"
 #include <QVariant>
-//#include "datastorer.h"
+#include "markstorer.h"
 #include <QDebug>
 
 MarkList::MarkList(QObject* parent) : QAbstractListModel(parent), m_marks()
@@ -12,11 +12,11 @@ QHash<int, QByteArray> MarkList::roleNames() const {
     QHash<int, QByteArray> roles;
     roles[IdRole] = "id";
     roles[NameRole] = "name";
-    roles[ColorRole] = "color";
     roles[ImageRole] = "image";
     roles[NoteRole] = "note";
-    roles[XRole] = "x_coord";
-    roles[YRole] = "y_coord";
+    roles[AltRole] = "alt";
+    roles[LatRole] = "lat";
+    roles[LongRole] = "long";
     return roles;
 }
 
@@ -28,35 +28,34 @@ QVariant MarkList::data(const QModelIndex &index, int role) const {
         return QVariant(m_marks[index.row()].id);
     case NameRole:
         return QVariant(m_marks[index.row()].name);
-    case ColorRole:
-        return QVariant(m_marks[index.row()].color);
     case ImageRole:
         return QVariant(m_marks[index.row()].image);
     case NoteRole:
         return QVariant(m_marks[index.row()].note);
-    case XRole:
-        return QVariant(m_marks[index.row()].x_coord);
-    case YRole:
-        return QVariant(m_marks[index.row()].y_coord);
+    case AltRole:
+        return QVariant(m_marks[index.row()].coord.altitude());
+    case LatRole:
+        return QVariant(m_marks[index.row()].coord.latitude());
+    case LongRole:
+        return QVariant(m_marks[index.row()].coord.longitude());
     default:
         return QVariant();
     }
 }
 
-void MarkList::addMark(int id, QString name, QColor color, QImage image, QString note, double x_coord, double y_coord) {
+void MarkList::addMark(int id, QString name, QString image, QString note, QGeoCoordinate coord) {
     auto marksSize = m_marks.size();
     beginInsertRows(QModelIndex(), marksSize, marksSize);
-    m_marks.append(MapMark(id, name, color, image, note, x_coord, y_coord));
+    m_marks.append(MapMark(id, name, image, note, coord.altitude(), coord.latitude(), coord.longitude()));
     endInsertRows();
 }
-/*
-void MarkList::readList() {
+
+void MarkList::readMark() {
     beginResetModel();
-    m_marks = DataStorer::readData();
+    m_marks = MarkStorer::readMark();
     endResetModel();
 }
 
-void MarkList::storeList() {
-    DataStorer::storeData(m_marks);
-}*/
-
+void MarkList::storeMark() {
+    MarkStorer::storeMark(m_marks);
+}

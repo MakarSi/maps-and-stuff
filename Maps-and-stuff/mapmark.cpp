@@ -1,17 +1,18 @@
 #include "mapmark.h"
 
-
 #include <QString>
 #include <QColor>
 #include <QImage>
+#include <QGeoCoordinate>
 
-MapMark::MapMark(int id, QString name, QColor color, QImage image, QString note, double x_coord, double y_coord)
+MapMark::MapMark(int id, QString name, QString image, QString note,
+                 double altitude, double latitude, double longtitude)
 {
     this->id = id; //hash func shoul be here
     this->name = name;
-    this->color = color;
     this->image = image;
     this->note = note;
-    this->x_coord = x_coord;
-    this->y_coord = y_coord;
+    this->coord.setAltitude(altitude);
+    this->coord.setLatitude(latitude);
+    this->coord.setLongitude(longtitude);
 }

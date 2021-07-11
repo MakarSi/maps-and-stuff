@@ -33,7 +33,7 @@ Page {
                         console.log("You clicked the circle!");
                      }
 
-                }}', map)
+}}', map)
                 circle.center = map.toCoordinate(Qt.point(mouseX, mouseY), true)
                 circle.radius = 500
                 circle.color = Qt.rgba(Math.random(),Math.random(),Math.random(),1)
