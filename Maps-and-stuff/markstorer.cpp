@@ -30,7 +30,6 @@ void FSPrivate::createDataMarkPath() {
 
 MapMark FSPrivate::convertJsonObjectToMark(QJsonObject &jsonObject) {
     return MapMark(
-                jsonObject["id"].toInt(),
             jsonObject["name"].toString(),
             jsonObject["image"].toString(),
             jsonObject["note"].toString(),

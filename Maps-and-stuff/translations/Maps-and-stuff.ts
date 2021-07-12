@@ -33,11 +33,34 @@
 <context>
     <name>ListPage</name>
     <message>
-        <source>Item %1</source>
+        <source>My Marks</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>MarkAddDialog</name>
+    <message>
+        <source>Create</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <source>List of marks</source>
+        <source>New mark</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mark name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Mark name</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Note text:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Note text</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

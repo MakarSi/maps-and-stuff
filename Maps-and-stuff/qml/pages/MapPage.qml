@@ -32,13 +32,18 @@ Page {
                     onClicked: {
                         console.log("You clicked the circle!");
                      }
-
 }}', map)
                 circle.center = map.toCoordinate(Qt.point(mouseX, mouseY), true)
                 circle.radius = 500
                 circle.color = Qt.rgba(Math.random(),Math.random(),Math.random(),1)
                 circle.border.width = 3
                 map.addMapItem(circle)
+
+                var dialog = pageStack.push(Qt.resolvedUrl("MarkAddDialog.qml"));
+                dialog.accepted.connect(function() {
+                    markListStorage.addMark(dialog.name, "file:map_mark.jpg",
+                                            dialog.note, map.toCoordinate(Qt.point(mouseX, mouseY), true));
+                });
             }
         }
 

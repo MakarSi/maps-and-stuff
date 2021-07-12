@@ -5,10 +5,11 @@
 #include <QColor>
 #include <QImage>
 #include <QGeoCoordinate>
+#include <QUuid>
 
 struct MapMark{
-    MapMark(int, QString, QString, QString, double, double, double);
-    int id;
+    MapMark(QString, QString, QString, double, double, double);
+    QString id;
     QString name;
     QString image;
     QString note;

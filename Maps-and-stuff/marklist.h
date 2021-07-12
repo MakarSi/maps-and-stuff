@@ -25,7 +25,7 @@ public:
     virtual QVariant data(const QModelIndex &index, int role) const;
     QHash<int, QByteArray> roleNames() const;
 
-    Q_INVOKABLE void addMark(int, QString, QString, QString, QGeoCoordinate);
+    Q_INVOKABLE void addMark(QString, QString, QString, QGeoCoordinate);
     Q_INVOKABLE void readMark();
     Q_INVOKABLE void storeMark();
 private:

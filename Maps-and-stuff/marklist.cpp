@@ -43,10 +43,10 @@ QVariant MarkList::data(const QModelIndex &index, int role) const {
     }
 }
 
-void MarkList::addMark(int id, QString name, QString image, QString note, QGeoCoordinate coord) {
+void MarkList::addMark(QString name, QString image, QString note, QGeoCoordinate coord) {
     auto marksSize = m_marks.size();
     beginInsertRows(QModelIndex(), marksSize, marksSize);
-    m_marks.append(MapMark(id, name, image, note, coord.altitude(), coord.latitude(), coord.longitude()));
+    m_marks.append(MapMark(name, image, note, coord.altitude(), coord.latitude(), coord.longitude()));
     endInsertRows();
 }
 

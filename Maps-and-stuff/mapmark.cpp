@@ -4,11 +4,12 @@
 #include <QColor>
 #include <QImage>
 #include <QGeoCoordinate>
+#include <QUuid>
 
-MapMark::MapMark(int id, QString name, QString image, QString note,
+MapMark::MapMark(QString name, QString image, QString note,
                  double altitude, double latitude, double longtitude)
 {
-    this->id = id; //hash func shoul be here
+    this->id = QUuid::createUuid().toString();
     this->name = name;
     this->image = image;
     this->note = note;
