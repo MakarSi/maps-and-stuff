@@ -36,6 +36,7 @@ DISTFILES += qml/Maps-and-stuff.qml \
     qml/pages/ListPage.qml \
     qml/pages/MapPage.qml \
     qml/pages/MarkAddDialog.qml \
+    qml/pages/MarkEditor.qml \
     rpm/Maps-and-stuff.changes.in \
     rpm/Maps-and-stuff.changes.run.in \
     rpm/Maps-and-stuff.spec \

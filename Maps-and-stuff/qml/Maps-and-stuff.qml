@@ -14,6 +14,12 @@ ApplicationWindow
     FileList {
         id: fileListStorage
     }
-    Component.onCompleted: fileListStorage.readList()
-    Component.onDestruction: fileListStorage.storeList()
+    Component.onCompleted: {
+        markListStorage.readMark()
+        fileListStorage.readList()
+    }
+    Component.onDestruction: {
+        markListStorage.storeMark()
+        fileListStorage.storeList()
+    }
 }

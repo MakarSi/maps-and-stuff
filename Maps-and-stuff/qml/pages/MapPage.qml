@@ -24,25 +24,24 @@ Page {
         MouseArea{
             anchors.fill: parent;
             onClicked:{
-                console.log(QtPositioning.coordinate(-27.5, 153.1).isValid)
                 console.log(mouseX, mouseY)
-                var circle = Qt.createQmlObject('import QtLocation 5.0; MapCircle {
-                MapMouseArea {
-                    anchors.fill: parent
-                    onClicked: {
-                        console.log("You clicked the circle!");
-                     }
-}}', map)
-                circle.center = map.toCoordinate(Qt.point(mouseX, mouseY), true)
-                circle.radius = 500
-                circle.color = Qt.rgba(Math.random(),Math.random(),Math.random(),1)
-                circle.border.width = 3
-                map.addMapItem(circle)
 
                 var dialog = pageStack.push(Qt.resolvedUrl("MarkAddDialog.qml"));
                 dialog.accepted.connect(function() {
                     markListStorage.addMark(dialog.name, "file:map_mark.jpg",
                                             dialog.note, map.toCoordinate(Qt.point(mouseX, mouseY), true));
+                    var circle = Qt.createQmlObject('import QtLocation 5.0; MapCircle {
+                    MapMouseArea {
+                        anchors.fill: parent
+                        onClicked: {
+                            console.log("You clicked the circle!");
+                         }
+                     }}', map)
+                    circle.center = map.toCoordinate(Qt.point(mouseX, mouseY), true)
+                    circle.radius = 500
+                    circle.color = Qt.rgba(Math.random(),Math.random(),Math.random(),1)
+                    circle.border.width = 3
+                    map.addMapItem(circle)
                 });
             }
         }

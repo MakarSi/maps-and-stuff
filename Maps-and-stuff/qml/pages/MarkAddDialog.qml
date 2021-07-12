@@ -3,17 +3,13 @@ import Sailfish.Silica 1.0
 import ".."
 
 Dialog{
-    id: markEditor
-    property int ident
+    id: markAddDialog
     property string name: ""
     property string image: ""
     property string note: ""
-    property double alt
-    property double lat
-    property double longt
 
     DialogHeader {
-        id: editorHeader
+        id: markAddHeader
         acceptText: qsTr("Create")
         title: qsTr("New mark")
     }
@@ -24,7 +20,7 @@ Dialog{
             left: parent.left
             right: parent.right
             bottom: parent.bottom
-            top: editorHeader.bottom
+            top: markAddHeader.bottom
             leftMargin: Theme.horizontalPageMargin
             rightMargin: Theme.horizontalPageMargin
         }
@@ -55,7 +51,7 @@ Dialog{
 
     }
     onAccepted: {
-        markEditor.name = markNameField.text
-        markEditor.note = noteTextArea.text
+        markAddDialog.name = markNameField.text
+        markAddDialog.note = noteTextArea.text
     }
 }
