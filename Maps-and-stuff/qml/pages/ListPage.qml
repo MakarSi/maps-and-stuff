@@ -9,7 +9,7 @@ Page {
     property string mark_name: ""
     property string note_name: ""
 
-    SilicaListView {
+    ListView {
         id: silicaView
         model: markListStorage
         anchors.fill: parent
@@ -27,17 +27,30 @@ Page {
                     listPage.mark_name = model.name;
                     listPage.note_name = model.note;
                     var dialog = pageStack.push(markEditor, {
-                                                   markname: model.name,
+                                                   markName: model.name,
                                                    markNote: model.note
                                                 });
                     dialog.accepted.connect(function() {
-                        model.name = dialog.markName;
-                        model.image = "mark_icon.png";
-                        model.note = dialog.markNote;
+                        name = dialog.markName;
+                        image = "mark_icon.png";
+                        note = dialog.markNote;
                         markListStorage.storeMark();
                         console.log(dialog.markName);
                         console.log(model.name);
                     });
+
+                    // Column is always zero as it's a list
+                    var column_number = 0;
+                    // get `QModelIndex`
+                    var q_model_index = markListStorage.index(index, column_number);
+
+                    // see for list of roles:
+                    // http://doc.qt.io/qt-5/qabstractitemmodel.html#roleNames
+                    var role = 1
+
+                    var data_changed = markListStorage.setData(q_model_index, "3", role);
+
+                    console.log("data change successful?", data_changed);
                 }
             }
             Label {
