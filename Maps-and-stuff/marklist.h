@@ -15,19 +15,19 @@ public:
     enum MarkRoles {
         IdRole,
         NameRole,
-        ColorRole,
         ImageRole,
         NoteRole,
-        XRole,
-        YRole
+        AltRole,
+        LongRole,
+        LatRole
     };
     virtual int rowCount(const QModelIndex&) const { return m_marks.size(); }
     virtual QVariant data(const QModelIndex &index, int role) const;
-    QHash<int, QByteArray> roleNames() const;
 
-    Q_INVOKABLE void addMark(int, QString, QColor, QImage, QString, double, double);
-    //Q_INVOKABLE void readList();
-    //Q_INVOKABLE void storeList();
+    QHash<int, QByteArray> roleNames() const;
+    Q_INVOKABLE void addMark(QString, QString, QString, QGeoCoordinate);
+    Q_INVOKABLE void readMark();
+    Q_INVOKABLE void storeMark();
 private:
     QList<MapMark> m_marks;
 };

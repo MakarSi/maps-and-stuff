@@ -6,23 +6,6 @@ import ".."
 
 Page {
     id: pageMap
-
-   Location {
-        id: location
-        coordinate {
-            latitude: -27.5
-            longitude: 153.1
-        }
-    }
-
-    PositionSource{
-        active: true
-        onPositionChanged: {
-            console.log(position.coordinate)
-            map.center = position.coordinate
-        }
-    }
-
     Plugin {
         id: osmPlugin
         name: "osm"
@@ -33,17 +16,46 @@ Page {
     Map {
         id: map
         anchors.fill: parent
-        plugin: Plugin { name: "osm" }
-        center: QtPositioning.coordinate(50, 30)
-        gesture.enabled: true
-        zoomLevel: 4
+        plugin: osmPlugin
+        zoomLevel: 15
+
+        Component.onCompleted:
+        {
+            console.log(markListStorage.rowCount());
+            //here should be creating map items
+            //from marklist
+        }
+
+        MapItemView {
+            model: markListStorage
+            delegate: MapQuickItem {
+                coordinate: QtPositioning.coordinate(model.lat, model.longt, model.alt)
+                anchorPoint.x: image.width/2
+                anchorPoint.y: image.height
+                sourceItem: Image {
+                    source: "mark_icon.png"
+                    id: image
+                    width: 48 * Theme.pixelRatio
+                    height: sourceSize.height * width /
+                            sourceSize.width
+                }
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: console.log("Click")
+                }
+            }
+        }
 
         MapMouseArea{
             anchors.fill: parent;
             onClicked:{
-                console.log(mouseX, mouseY)
-                location.coordinate = map.toCoordinate(Qt.point(mouseX, mouseY), true)
-                console.log(location.coordinate)
+                console.log(markListStorage.rowCount());
+                console.log(mouseX, mouseY);
+                var dialog = pageStack.push(Qt.resolvedUrl("MarkAddDialog.qml"));
+                dialog.accepted.connect(function() {
+                    markListStorage.addMark(dialog.name, "mark_icon.png",
+                                            dialog.note, map.toCoordinate(Qt.point(mouseX, mouseY), true));
+                });
             }
         }
 

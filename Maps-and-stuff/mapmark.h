@@ -4,16 +4,16 @@
 #include <QString>
 #include <QColor>
 #include <QImage>
+#include <QGeoCoordinate>
+#include <QUuid>
 
 struct MapMark{
-    MapMark(int, QString, QColor, QImage, QString, double, double);
-    int id;
+    MapMark(QString, QString, QString, QGeoCoordinate);
+    QString id;
     QString name;
-    QColor color;
-    QImage image;
+    QString image;
     QString note;
-    double x_coord, y_coord;
-    //list of files??
+    QGeoCoordinate coord;
 };
 
 #endif // MAPMARK_H

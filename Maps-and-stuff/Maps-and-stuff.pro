@@ -32,13 +32,14 @@ DISTFILES += qml/Maps-and-stuff.qml \
     ../git_proj/maps-and-stuff/MyMap/qml/pages/MapPage.qml \
     icons/Anacondaz.webm \
     qml/cover/CoverPage.qml \
-    qml/pages/FileListMain.qml \
     qml/pages/FileViewPage.qml \
     qml/pages/FilesPage.qml \
     qml/pages/ListPage.qml \
     qml/pages/MapPage.qml \
     qml/pages/MyVideo.qml \
     qml/pages/ProgressBar.qml \
+    qml/pages/MarkAddDialog.qml \
+    qml/pages/MarkEditor.qml \
     rpm/Maps-and-stuff.changes.in \
     rpm/Maps-and-stuff.changes.run.in \
     rpm/Maps-and-stuff.spec \

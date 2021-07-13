@@ -4,12 +4,16 @@ import ".."
 
 Page {
     id: listPage
+
     SilicaListView {
         anchors.fill: parent
-        header: PageHeader { title: qsTr("List of marks") }
+        model: markListStorage
+        header: PageHeader {
+            title: qsTr("My Marks")
+        }
         delegate: ListItem {
             Label {
-                text: qsTr("Item %1").arg(model.index + 1)
+                text: model.name
                 anchors.verticalCenter: parent.verticalCenter
                 x: Theme.horizontalPageMargin
                 color: highlighted ?
@@ -17,7 +21,6 @@ Page {
                            Theme.primaryColor
             }
         }
-        model:
         VerticalScrollDecorator{}
     }
 }

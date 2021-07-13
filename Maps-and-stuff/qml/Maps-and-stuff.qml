@@ -8,10 +8,19 @@ ApplicationWindow
 {
     initialPage: Component { MapPage { } }
     cover: Qt.resolvedUrl("cover/CoverPage.qml")
+    allowedOrientations: defaultAllowedOrientations
+    MarkList{
+        id: markListStorage
+    }
     FileList {
         id: fileListStorage
     }
-    allowedOrientations: defaultAllowedOrientations
-    Component.onCompleted: fileListStorage.readList()
-    Component.onDestruction: fileListStorage.storeList()
+    Component.onCompleted: {
+        markListStorage.readMark()
+        fileListStorage.readList()
+    }
+    Component.onDestruction: {
+        markListStorage.storeMark()
+        fileListStorage.storeList()
+    }
 }
