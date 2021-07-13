@@ -7,7 +7,7 @@ import ".."
 Page {
     id: pageMap
 
-    Location {
+   Location {
         id: location
         coordinate {
             latitude: -27.5
@@ -33,11 +33,12 @@ Page {
     Map {
         id: map
         anchors.fill: parent
-        plugin: osmPlugin
-        center: QtPositioning.coordinate(59.91, 10.75)
-        zoomLevel: 10
+        plugin: Plugin { name: "osm" }
+        center: QtPositioning.coordinate(50, 30)
+        gesture.enabled: true
+        zoomLevel: 4
 
-        MouseArea{
+        MapMouseArea{
             anchors.fill: parent;
             onClicked:{
                 console.log(mouseX, mouseY)
@@ -76,6 +77,20 @@ Page {
             }
 
             onClicked: pageStack.push("FilesPage.qml")
+        }
+        Button {
+            anchors.right: parent.right
+            anchors.verticalCenter: parent.verticalCenter
+            Text{
+                anchors.centerIn: parent
+                font.pointSize: 40
+                font.bold: true
+                style: Text.Outline
+                styleColor: "white"
+                text: "File manager"
+                color: "black"
+            }
+            onClicked: pageStack.push("FileManager.qml")
         }
     }
 }

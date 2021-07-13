@@ -32,6 +32,8 @@ PkgConfigBR:
 Requires:
   - sailfishsilica-qt5 >= 0.10.9 
   - qt5-qtmultimedia
+  - qt5-qtmultimedia-plugin-mediaservice-gstmediaplayer
+  - qt5-qtmultimedia-plugin-mediaservice-gstmediacapture
   - qt5-qtdeclarative-import-multimedia
   - qt5-qtdeclarative-import-positioning
   - qt5-qtpositioning

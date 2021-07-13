@@ -5,22 +5,45 @@
 #include <QFileInfo>
 #include <QStandardPaths>
 #include <QDir>
+#include <QDebug>
 
 class file
 {
 public:
-    file(QString oldPath, int id) : markId(id)
+    file(QString oldPath, QString id) : markId(id)
     {
-        QFile f(oldPath);
-        QFileInfo fInfo(f);
-        QString name = fInfo.fileName();
-        auto dir = QStandardPaths::AppDataLocation;
-        QString newPath = dir + name;
-        QFile::copy(oldPath, newPath);
+        auto dir = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
+        QFileInfo fInfo(oldPath);
+        oldPath = fInfo.filePath();
+        if (fInfo.path() == dir) { fileInfo = fInfo; return; }
+        if (oldPath[0] == 'f') oldPath = oldPath.right(oldPath.size() - 7);
+
+        QString name;
+        QString short_name = fInfo.baseName();
+        QString ext = fInfo.suffix();
+        name = short_name + id + '.' + ext;
+
+        QString newPath = dir + "/" + name;
+        QFile f(newPath);
+        f.open(QIODevice::Truncate | QIODevice::WriteOnly);
+
+        QFile f_old(oldPath);
+        f_old.open(QIODevice::ReadWrite);
+        QByteArray data = f_old.readAll();
+        //qDebug() << data << "\n";
+        f_old.close();
+        f.write(data);
+        f.close();
+        fileInfo = QFileInfo(newPath);
+        qDebug() << oldPath << "\n" << newPath << "\n";
     }
-    QFileInfo fileInfo;
-    QString filePath;
-    int markId;
+    file(const file& f) : fileInfo(f.fileInfo), markId(f.markId)
+    {
+
+    }
+    file() {}
+    QFileInfo fileInfo = QFileInfo();
+    QString markId = "";
 };
 
 #endif // FILE_H

@@ -18,6 +18,8 @@ Source0:    %{name}-%{version}.tar.bz2
 Source100:  Maps-and-stuff.yaml
 Requires:   sailfishsilica-qt5 >= 0.10.9
 Requires:   qt5-qtmultimedia
+Requires:   qt5-qtmultimedia-plugin-mediaservice-gstmediaplayer
+Requires:   qt5-qtmultimedia-plugin-mediaservice-gstmediacapture
 Requires:   qt5-qtdeclarative-import-multimedia
 Requires:   qt5-qtdeclarative-import-positioning
 Requires:   qt5-qtpositioning

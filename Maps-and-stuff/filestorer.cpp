@@ -31,14 +31,14 @@ void FSPrivate::createDataPath() {
 file FSPrivate::convertJsonObjectToNote(QJsonObject &jsonObject) {
     return file(
         jsonObject["path"].toString(),
-        jsonObject["id"].toInt()
+        jsonObject["id"].toString()
     );
 }
 
 QJsonObject FSPrivate::convertNoteToJsonObject(file &f) {
     QJsonObject fileObject;
     fileObject["id"] = f.markId;
-    fileObject["path"] = f.filePath;
+    fileObject["path"] = f.fileInfo.absoluteFilePath();
     return fileObject;
 }
 
