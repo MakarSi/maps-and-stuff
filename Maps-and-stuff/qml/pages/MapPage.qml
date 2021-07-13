@@ -64,6 +64,12 @@ Page {
                             console.log(model.name);
                         });
                     }
+                    onPressAndHold: {
+                        console.log("PRESS");
+                        var c = markListStorage.deleteElem(model.lat, model.longt, model.alt);
+                        markListStorage.storeMark();
+                        console.log(c);
+                    }
                 }
             }
         }
