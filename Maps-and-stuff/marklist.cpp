@@ -15,8 +15,8 @@ QHash<int, QByteArray> MarkList::roleNames() const {
     roles[ImageRole] = "image";
     roles[NoteRole] = "note";
     roles[AltRole] = "alt";
+    roles[LongRole] = "longt";
     roles[LatRole] = "lat";
-    roles[LongRole] = "long";
     return roles;
 }
 
@@ -46,7 +46,7 @@ QVariant MarkList::data(const QModelIndex &index, int role) const {
 void MarkList::addMark(QString name, QString image, QString note, QGeoCoordinate coord) {
     auto marksSize = m_marks.size();
     beginInsertRows(QModelIndex(), marksSize, marksSize);
-    m_marks.append(MapMark(name, image, note, coord.altitude(), coord.latitude(), coord.longitude()));
+    m_marks.append(MapMark(name, image, note, coord));
     endInsertRows();
 }
 

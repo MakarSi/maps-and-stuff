@@ -18,30 +18,57 @@ Page {
         id: map
         anchors.fill: parent
         plugin: osmPlugin
-        center: QtPositioning.coordinate(-27.5, 153.1)
-        zoomLevel: 30
+        zoomLevel: 15
+
+        Component.onCompleted:
+        {
+            console.log(markListStorage.rowCount());
+            //here should be creating map items
+            //from marklist
+        }
+
+        MapItemView {
+            model: markListStorage
+            delegate: MapQuickItem {
+                coordinate: QtPositioning.coordinate(model.lat, model.longt, model.alt)
+                anchorPoint.x: image.width/2
+                anchorPoint.y: image.height
+                sourceItem: Image {
+                    source: "mark_icon.png"
+                    id: image
+                    width: 48 * Theme.pixelRatio
+                    height: sourceSize.height * width /
+                            sourceSize.width
+                }
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: console.log("Click")
+                }
+            }
+        }
 
         MouseArea{
             anchors.fill: parent;
             onClicked:{
-                console.log(mouseX, mouseY)
-
+                console.log(markListStorage.rowCount());
+                console.log(mouseX, mouseY);
                 var dialog = pageStack.push(Qt.resolvedUrl("MarkAddDialog.qml"));
                 dialog.accepted.connect(function() {
-                    markListStorage.addMark(dialog.name, "file:map_mark.jpg",
+                    markListStorage.addMark(dialog.name, "mark_icon.png",
                                             dialog.note, map.toCoordinate(Qt.point(mouseX, mouseY), true));
-                    var circle = Qt.createQmlObject('import QtLocation 5.0; MapCircle {
-                    MapMouseArea {
-                        anchors.fill: parent
-                        onClicked: {
-                            console.log("You clicked the circle!");
-                         }
-                     }}', map)
-                    circle.center = map.toCoordinate(Qt.point(mouseX, mouseY), true)
-                    circle.radius = 500
-                    circle.color = Qt.rgba(Math.random(),Math.random(),Math.random(),1)
-                    circle.border.width = 3
-                    map.addMapItem(circle)
+                    var newItem = Qt.createQmlObject('import QtLocation 5.0; import QtQuick 2.0; MapQuickItem {
+                        anchorPoint.x: image.width/2
+                        anchorPoint.y: image.height
+                        sourceItem: Image {source: "mark_icon.png"
+                        id: image
+                        width: 48 * Theme.pixelRatio
+                        height: sourceSize.height * width /
+                        sourceSize.width
+                        }
+                        MouseArea { anchors.fill: parent
+                        onClicked: console.log("Click") } }', map, "dynamic");
+                    newItem.coordinate = map.toCoordinate(Qt.point(mouseX, mouseY), true);
+                    //map.addMapItem(newItem);
                 });
             }
         }

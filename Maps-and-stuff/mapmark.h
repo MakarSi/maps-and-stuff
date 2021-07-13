@@ -8,7 +8,7 @@
 #include <QUuid>
 
 struct MapMark{
-    MapMark(QString, QString, QString, double, double, double);
+    MapMark(QString, QString, QString, QGeoCoordinate);
     QString id;
     QString name;
     QString image;
