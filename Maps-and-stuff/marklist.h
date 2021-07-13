@@ -28,7 +28,12 @@ public:
     Q_INVOKABLE void addMark(QString, QString, QString, QGeoCoordinate);
     Q_INVOKABLE void readMark();
     Q_INVOKABLE void storeMark();
-private:
+
+    Q_INVOKABLE bool deleteElem(double lat, double longt, double alt){
+        MapMark m(QGeoCoordinate(lat, longt, alt));
+        return m_marks.removeOne(m);
+    }
+
     QList<MapMark> m_marks;
 };
 

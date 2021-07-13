@@ -9,6 +9,7 @@ ApplicationWindow
     initialPage: Component { MapPage { } }
     cover: Qt.resolvedUrl("cover/CoverPage.qml")
     allowedOrientations: defaultAllowedOrientations
+
     MarkList{
         id: markListStorage
     }

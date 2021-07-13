@@ -6,6 +6,9 @@ import ".."
 
 Page {
     id: pageMap
+    property string mark_name: ""
+    property string note_name: ""
+
     Plugin {
         id: osmPlugin
         name: "osm"
@@ -25,8 +28,8 @@ Page {
             //here should be creating map items
             //from marklist
         }
-
         MapItemView {
+            id: mapView
             model: markListStorage
             delegate: MapQuickItem {
                 coordinate: QtPositioning.coordinate(model.lat, model.longt, model.alt)
@@ -41,7 +44,33 @@ Page {
                 }
                 MouseArea {
                     anchors.fill: parent
-                    onClicked: console.log("Click")
+                    Component{
+                        id: markEditor
+                        MarkEditor{}
+                    }
+                    onClicked: {
+                        pageMap.mark_name = model.name;
+                        pageMap.note_name = model.note;
+                        var dialog = pageStack.push(markEditor, {
+                                                        markName: model.name,
+                                                        markNote: model.note,
+                                                        markId: model.id
+                                                });
+                        dialog.accepted.connect(function() {
+                            model.name = dialog.markName;
+                            model.image = "mark_icon.png";
+                            model.note = dialog.markNote;
+                            markListStorage.storeMark();
+                            console.log(dialog.markName);
+                            console.log(model.name);
+                        });
+                    }
+                    onPressAndHold: {
+                        console.log("PRESS");
+                        var c = markListStorage.deleteElem(model.lat, model.longt, model.alt);
+                        markListStorage.storeMark();
+                        console.log(c);
+                    }
                 }
             }
         }
@@ -102,10 +131,19 @@ Page {
                 text: "File manager"
                 color: "black"
             }
+<<<<<<< HEAD
             onClicked:
             {
                 pageStack.push("FileManager.qml");
             }
+=======
+            Component{
+                id: listPage
+                ListPage{}
+            }
+
+            onClicked: pageStack.push(listPage)
+>>>>>>> 09f070cb6bc410ce033d8c5d134212d471bc8016
         }
     }
 }

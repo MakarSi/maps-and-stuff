@@ -79,4 +79,19 @@
         <translation type="unfinished"></translation>
     </message>
 </context>
+<context>
+    <name>MarkEditor</name>
+    <message>
+        <source>Mark name:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Note text:</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Accept</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
 </TS>
