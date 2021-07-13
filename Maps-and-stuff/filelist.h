@@ -33,11 +33,24 @@ public:
     void fileType(int x) { _fileType = x; }
 
     explicit FileList(QObject *parent=nullptr);
+    FileList(QString _id, int _file, QObject *parent=nullptr) : FileList(parent)
+    {
+        _markId = _id;
+        _fileType = _file;
+    }
+
+    FileList(const FileList& other) : QAbstractListModel()
+    {
+        m_files = other.m_files;
+        _markId = other._markId;
+        _fileType = other._fileType;
+    }
 
     // Note list
     enum FileRoles {
         IdRole = Qt::UserRole + 1,
-        PathRole
+        DirRole,
+        NameRole
     };
 
     virtual int rowCount(const QModelIndex&) const { return m_files.size(); }
@@ -47,6 +60,24 @@ public:
     Q_INVOKABLE void addFile(QString path, QString id);
     Q_INVOKABLE void readList();
     Q_INVOKABLE void storeList();
+    Q_INVOKABLE void deleteThese(FileList* otherList)
+    {
+        QList<file> other = otherList->m_files;
+        file f;
+        foreach(f, other)
+            m_files.removeOne(f);
+    }
+    Q_INVOKABLE void deleteOne(FileList* otherList, QString path)
+    {
+        file f;
+        foreach(f, otherList->m_files)
+            if (f.fileInfo.filePath() == path)
+            {
+                m_files.removeOne(f);
+                QFile::remove(path);
+                qDebug() << path << '\n';
+            }
+    }
 private:
     QList<file> m_files;
 };

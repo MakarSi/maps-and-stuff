@@ -3,13 +3,15 @@
 
 FileList::FileList(QObject* parent) : QAbstractListModel(parent), m_files()
 {
-
+    if (_markId == "" && _fileType == -1) return;
+    filterList();
 }
 
 QHash<int, QByteArray> FileList::roleNames() const {
     QHash<int, QByteArray> roles;
     roles[IdRole] = "id";
-    roles[PathRole] = "path";
+    roles[DirRole] = "path";
+    roles[NameRole] = "name";
     return roles;
 }
 
@@ -19,14 +21,20 @@ QVariant FileList::data(const QModelIndex &index, int role) const {
     switch(role) {
     case IdRole:
         return QVariant(m_files[index.row()].markId);
-    case PathRole:
-        return QVariant(m_files[index.row()].fileInfo.absoluteFilePath());
+    case DirRole:
+        return QVariant(m_files[index.row()].fileInfo.path());
+    case NameRole:
+        return QVariant(m_files[index.row()].fileInfo.fileName());
     default:
         return QVariant();
     }
 }
 
 void FileList::addFile(QString path, QString id) {
+    file f;
+    foreach(f, m_files)
+        if (path.contains(f.fileInfo.fileName()))
+            return;
     auto filesSize = m_files.size();
     beginInsertRows(QModelIndex(), filesSize, filesSize);
     m_files.append(file(path, id));
@@ -34,10 +42,10 @@ void FileList::addFile(QString path, QString id) {
 }
 
 void FileList::filterList() {
-    if (_markId == "" && _fileType == -1) return;
     beginResetModel();
     m_files = FileStorer::readFile();
     endResetModel();
+    if (_markId == "" && _fileType == -1) return;
     file f;
     QList<file> new_files;
     foreach(f, m_files)

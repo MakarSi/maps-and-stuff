@@ -14,8 +14,8 @@ public:
     {
         auto dir = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
         QFileInfo fInfo(oldPath);
-        oldPath = fInfo.filePath();
         if (fInfo.path() == dir) { fileInfo = fInfo; return; }
+        oldPath = fInfo.filePath();
         if (oldPath[0] == 'f') oldPath = oldPath.right(oldPath.size() - 7);
 
         QString name;
@@ -42,6 +42,11 @@ public:
 
     }
     file() {}
+    bool operator== (const file& other)
+    {
+        return fileInfo == other.fileInfo &&
+                markId == other.markId;
+    }
     QFileInfo fileInfo = QFileInfo();
     QString markId = "";
 };

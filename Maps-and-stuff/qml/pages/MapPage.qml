@@ -102,7 +102,10 @@ Page {
                 text: "File manager"
                 color: "black"
             }
-            onClicked: pageStack.push("FileManager.qml")
+            onClicked:
+            {
+                pageStack.push("FileManager.qml");
+            }
         }
     }
 }
