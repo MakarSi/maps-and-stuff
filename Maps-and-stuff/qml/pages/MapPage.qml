@@ -53,7 +53,8 @@ Page {
                         pageMap.note_name = model.note;
                         var dialog = pageStack.push(markEditor, {
                                                         markName: model.name,
-                                                        markNote: model.note
+                                                        markNote: model.note,
+                                                        markId: model.id
                                                 });
                         dialog.accepted.connect(function() {
                             model.name = dialog.markName;

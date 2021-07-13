@@ -6,6 +6,7 @@ Dialog{
     id: markEditor
     property string markName: ""
     property string markNote: ""
+    property string markId: ""
 
     DialogHeader {
         id: markAddHeader
@@ -46,6 +47,43 @@ Dialog{
             id: noteTextArea
             width: parent.width
             text: markNote
+        }
+        Component{
+            id: fileManager
+            FileManager {}
+        }
+
+        Button{
+            width: parent.width
+            height: 100
+            text: "Images"
+            onClicked: {
+                pageStack.push(fileManager, { markId: markEditor.markId,
+                                              fileType: 0,
+                                              src: "image.png"});
+            }
+        }
+
+        Button{
+            width: parent.width
+            height: 100
+            text: "Videos"
+            onClicked: {
+                    pageStack.push(fileManager, { markId: markEditor.markId,
+                                              fileType: 1,
+                                              src: "video.png"});
+            }
+        }
+
+        Button{
+            width: parent.width
+            height: 100
+            text: "Music"
+            onClicked: {
+                pageStack.push(fileManager, { markId: markEditor.markId,
+                                              fileType: 2,
+                                              src: "music.png"});
+            }
         }
 
     }
