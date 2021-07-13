@@ -20,7 +20,7 @@ QHash<int, QByteArray> MarkList::roleNames() const {
     return roles;
 }
 
-QVariant MarkList::data(const QModelIndex &index, int role) const {
+QVariant MarkList::data(const QModelIndex &index, int role) const{
     if(!index.isValid())
         return QVariant();
     switch(role) {

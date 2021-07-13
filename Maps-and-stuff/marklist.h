@@ -28,7 +28,6 @@ public:
     Q_INVOKABLE void addMark(QString, QString, QString, QGeoCoordinate);
     Q_INVOKABLE void readMark();
     Q_INVOKABLE void storeMark();
-private:
     QList<MapMark> m_marks;
 };
 
