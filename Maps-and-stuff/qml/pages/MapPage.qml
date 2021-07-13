@@ -56,19 +56,6 @@ Page {
                 dialog.accepted.connect(function() {
                     markListStorage.addMark(dialog.name, "mark_icon.png",
                                             dialog.note, map.toCoordinate(Qt.point(mouseX, mouseY), true));
-                    var newItem = Qt.createQmlObject('import QtLocation 5.0; import QtQuick 2.0; MapQuickItem {
-                        anchorPoint.x: image.width/2
-                        anchorPoint.y: image.height
-                        sourceItem: Image {source: "mark_icon.png"
-                        id: image
-                        width: 48 * Theme.pixelRatio
-                        height: sourceSize.height * width /
-                        sourceSize.width
-                        }
-                        MouseArea { anchors.fill: parent
-                        onClicked: console.log("Click") } }', map, "dynamic");
-                    newItem.coordinate = map.toCoordinate(Qt.point(mouseX, mouseY), true);
-                    //map.addMapItem(newItem);
                 });
             }
         }
