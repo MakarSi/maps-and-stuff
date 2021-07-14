@@ -8,9 +8,10 @@
 
 MapMark::MapMark(QString name, QString image, QString note, QGeoCoordinate coord)
 {
-    this->id = QUuid::createUuid().toString();
     this->name = name;
     this->image = image;
     this->note = note;
     this->coord = coord;
+    double res = ((coord.latitude() + coord.longitude()) * (coord.latitude() * coord.latitude() + coord.longitude()  * coord.longitude()));
+    this->id = QString::number(res);
 }

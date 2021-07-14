@@ -10,18 +10,12 @@ Page {
     property string markId: ""
     property int fileType: -1 // 0 for photos, 1 for videos, 2 for music
     property string src: "music.png"
-    FileList{
-        id: customFileList
-        markId: myPage.markId
-        fileType: myPage.fileType
-    }
-    Component.onDestruction: console.log("asdas")
     SilicaListView {
         anchors.fill: parent
         header: PageHeader {
             title: qsTr("Related files")
         }
-        model: customFileList
+        model: fileListStorage /* */
         delegate: ListItem {
             Label {
                 anchors.leftMargin: 50
@@ -43,6 +37,7 @@ Page {
                     anchors.fill: parent
                     z: 2
                     onClicked: {
+                        console.log(model.path + '/' + model.name);
                         if (fileType == 0)
                             pageStack.push("MyPhoto.qml", {
                                                srcFile: model.path + '/' + model.name
@@ -75,10 +70,11 @@ Page {
                 onClicked:
                 {
                     var path = model.path + '/' + model.name;
-                    fileListStorage.deleteOne(customFileList, path);
+                    fileListStorage.deleteOne(path);
                     fileListStorage.storeList();
-                    customFileList.filterList();
-                    console.log(model.path);
+                    fileListStorage.filterOurList();
+                    //fileListStorage.deleteOne(fileListStorage, path); //
+                    //customFileList.filterList();
                     visible = false;
                 }
             }
@@ -102,7 +98,8 @@ Page {
                 picker.selectedContentChanged.connect(function () {
                     fileListStorage.addFile(picker.selectedContent, myPage.markId);
                     fileListStorage.storeList();
-                    customFileList.filterList();
+                    fileListStorage.filterOurList();
+                    //customFileList.filterList();
                 });
             }
         }
@@ -114,9 +111,10 @@ Page {
             text: qsTr("Delete all")
             onClicked:
             {
-                fileListStorage.deleteThese(customFileList);
+                fileListStorage.deleteThese(); /* */
                 fileListStorage.storeList();
-                customFileList.filterList();
+                fileListStorage.filterOurList();
+                //customFileList.filterList();
             }
         }
     }

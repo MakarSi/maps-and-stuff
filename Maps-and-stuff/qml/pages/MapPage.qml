@@ -109,7 +109,7 @@ Page {
             onClicked: pageStack.push("ListPage.qml")
         }
 
-        Button {
+        /*Button {
             anchors.left: parent.left
             anchors.bottom: parent.bottom
             Text{
@@ -123,8 +123,8 @@ Page {
             }
 
             onClicked: pageStack.push("FilesPage.qml")
-        }
-        Button {
+        }*/
+        /*Button {
             anchors.right: parent.right
             anchors.verticalCenter: parent.verticalCenter
             Text{
@@ -137,9 +137,7 @@ Page {
                 color: "black"
             }
             onClicked:
-            {
                 pageStack.push("FileManager.qml");
-            }
-        }
+        } */
     }
 }

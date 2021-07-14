@@ -13,15 +13,23 @@ ApplicationWindow
     MarkList{
         id: markListStorage
     }
+
     FileList {
         id: fileListStorage
     }
+
+    FileList{
+        id: customFileList
+    }
+
     Component.onCompleted: {
-        markListStorage.readMark()
-        fileListStorage.readList()
+        markListStorage.readMark();
+        fileListStorage.readList();
+        customFileList.filterList();
     }
     Component.onDestruction: {
-        markListStorage.storeMark()
-        fileListStorage.storeList()
+        markListStorage.storeMark();
+        fileListStorage.storeList();
+        customFileList.filterList();
     }
 }

@@ -8,14 +8,23 @@ import "."
 
 Page {
     property string srcFile: ""
-    ProgressBar{
-        anchors.bottom: video.top
-        anchors.horizontalCenter: parent.horizontalCenter
-        label: "%1 — %2".arg(video.metaData.author).arg(video.metaData.title)
-        value: video.position
-        maximumValue: video.duration
-    }
     Video{
+        Row{
+            MouseArea{
+                id: left
+                anchors.left: parent.left
+                height: parent.height
+                width: parent.width/2
+                onDoubleClicked :video.seek(video.position - 5000)
+            }
+            MouseArea{
+                id: right
+                anchors.left: left.right
+                height: parent.height
+                width: parent.width/2
+                onDoubleClicked :video.seek(video.position + 5000)
+            }
+        }
         anchors.centerIn: parent
         width: parent.width
         height: 400
