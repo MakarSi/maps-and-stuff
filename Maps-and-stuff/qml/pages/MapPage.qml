@@ -15,13 +15,12 @@ Page {
         PluginParameter {
         }
     }
-
     Map {
         id: map
         anchors.fill: parent
         plugin: osmPlugin
-        zoomLevel: 15
-
+        zoomLevel: 14
+        center: QtPositioning.coordinate(59.91, 10.75, 0)
         Component.onCompleted:
         {
             console.log(markListStorage.rowCount());
@@ -55,14 +54,14 @@ Page {
                                                         markName: model.name,
                                                         markNote: model.note,
                                                         markId: model.id
-                                                });
+                                                    });
                         dialog.accepted.connect(function() {
                             var tmp_lat = model.lat;
                             var tmp_longt = model.longt;
                             var tmp_alt = model.alt;
                             markListStorage.deleteElem(model.lat, model.longt, model.alt);
                             markListStorage.addMark(dialog.markName, "mark_icon.png", dialog.markNote,
-                                                     QtPositioning.coordinate(tmp_lat, tmp_longt, tmp_alt) );
+                                                    QtPositioning.coordinate(tmp_lat, tmp_longt, tmp_alt) );
                             //model.name = dialog.markName;
                             //model.image = "mark_icon.png";
                             //model.note = dialog.markNote;
