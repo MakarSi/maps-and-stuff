@@ -39,12 +39,12 @@ public:
         _fileType = _file;
     }
 
-    /* FileList(const FileList& other) : QAbstractListModel()
+    FileList(const FileList& other) : QAbstractListModel()
     {
         m_files = other.m_files;
         _markId = other._markId;
         _fileType = other._fileType;
-    } */
+    }
 
     // Note list
     enum FileRoles {
@@ -62,13 +62,20 @@ public:
     Q_INVOKABLE void storeList();
     Q_INVOKABLE void deleteThese(FileList* otherList)
     {
+        beginResetModel();
         QList<file> other = otherList->m_files;
         file f;
         foreach(f, other)
+        {
             m_files.removeOne(f);
+            QString path = f.fileInfo.filePath();
+            QFile::remove(path);
+        }
+        endResetModel();
     }
     Q_INVOKABLE void deleteOne(FileList* otherList, QString path)
     {
+        beginResetModel();
         file f;
         foreach(f, otherList->m_files)
             if (f.fileInfo.filePath() == path)
@@ -77,9 +84,37 @@ public:
                 QFile::remove(path);
                 qDebug() << path << '\n';
             }
+        endResetModel();
     }
+    Q_INVOKABLE void deleteThese()
+    {
+        beginResetModel();
+        file f;
+        foreach(f, m_files)
+        {
+            m_full.removeOne(f);
+            QString path = f.fileInfo.filePath();
+            QFile::remove(path);
+        }
+        endResetModel();
+    }
+    Q_INVOKABLE void deleteOne(QString path)
+    {
+        beginResetModel();
+        file f;
+        foreach(f, m_full)
+            if (f.fileInfo.filePath() == path)
+            {
+                m_full.removeOne(f);
+                QFile::remove(path);
+            }
+        endResetModel();
+    }
+    Q_INVOKABLE void filterOurList();
+
 private:
     QList<file> m_files;
+    QList<file> m_full;
 };
 
 

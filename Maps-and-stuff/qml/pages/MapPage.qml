@@ -55,11 +55,17 @@ Page {
                                                         markName: model.name,
                                                         markNote: model.note,
                                                         markId: model.id
-                                                });
+                                                    });
                         dialog.accepted.connect(function() {
-                            model.name = dialog.markName;
-                            model.image = "mark_icon.png";
-                            model.note = dialog.markNote;
+                            var tmp_lat = model.lat;
+                            var tmp_longt = model.longt;
+                            var tmp_alt = model.alt;
+                            markListStorage.deleteElem(model.lat, model.longt, model.alt);
+                            markListStorage.addMark(dialog.markName, "mark_icon.png", dialog.markNote,
+                                                    QtPositioning.coordinate(tmp_lat, tmp_longt, tmp_alt) );
+                            //model.name = dialog.markName;
+                            //model.image = "mark_icon.png";
+                            //model.note = dialog.markNote;
                             markListStorage.storeMark();
                             console.log(dialog.markName);
                             console.log(model.name);

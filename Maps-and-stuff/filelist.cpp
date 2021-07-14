@@ -3,8 +3,8 @@
 
 FileList::FileList(QObject* parent) : QAbstractListModel(parent), m_files()
 {
-    if (_markId == "" && _fileType == -1) return;
-    filterList();
+    readList();
+    filterOurList();
 }
 
 QHash<int, QByteArray> FileList::roleNames() const {
@@ -32,12 +32,14 @@ QVariant FileList::data(const QModelIndex &index, int role) const {
 
 void FileList::addFile(QString path, QString id) {
     file f;
-    foreach(f, m_files)
-        if (path.contains(f.fileInfo.fileName()))
+    QFileInfo fi(path);
+    QString base_name = fi.baseName();
+    foreach(f, m_full)
+        if (f.fileInfo.baseName().contains(base_name) && f.markId == id)
             return;
-    auto filesSize = m_files.size();
+    auto filesSize = m_full.size();
     beginInsertRows(QModelIndex(), filesSize, filesSize);
-    m_files.append(file(path, id));
+    m_full.append(file(path, id));
     endInsertRows();
 }
 
@@ -46,6 +48,7 @@ void FileList::filterList() {
     m_files = FileStorer::readFile();
     endResetModel();
     if (_markId == "" && _fileType == -1) return;
+    beginResetModel();
     file f;
     QList<file> new_files;
     foreach(f, m_files)
@@ -53,17 +56,17 @@ void FileList::filterList() {
         if (f.markId == _markId)
         {
             auto ext = f.fileInfo.completeSuffix();
-            if (_fileType == 0)
+            if (_fileType == 2)
             {
                 if (ext == "mp3" || ext == "ac3" || ext == "wav" || ext == "aif" || ext == "mid" || ext == "flac")
                     new_files.append(f);
             }
-            else if (_fileType == 1)
+            else if (_fileType == 0)
             {
                 if (ext == "jpeg" || ext == "jpg" || ext == "raw" || ext == "tiff" || ext == "png" || ext == "gif" || ext == "bmp")
                     new_files.append(f);
             }
-            else if (_fileType == 2)
+            else if (_fileType == 1)
             {
                 if (ext == "mkv" || ext == "mpg" || ext == "mov" || ext == "wmv" || ext == "avi")
                     new_files.append(f);
@@ -71,14 +74,51 @@ void FileList::filterList() {
         }
     }
     m_files = new_files;
+    endResetModel();
+}
+
+void FileList::filterOurList()
+{
+    file f;
+    foreach(f, m_full) qDebug() << f.fileInfo.baseName() << '\n';
+    qDebug() << "---------------\n";
+    beginResetModel();
+    endResetModel();
+    if (_markId == "" && _fileType == -1) {m_files = m_full; return;}
+    beginResetModel();
+    QList<file> new_files;
+    foreach(f, m_full)
+    {
+        if (f.markId == _markId)
+        {
+            auto ext = f.fileInfo.completeSuffix();
+            if (_fileType == 2)
+            {
+                if (ext == "mp3" || ext == "ac3" || ext == "wav" || ext == "aif" || ext == "mid" || ext == "flac")
+                    new_files.append(f);
+            }
+            else if (_fileType == 0)
+            {
+                if (ext == "jpeg" || ext == "jpg" || ext == "raw" || ext == "tiff" || ext == "png" || ext == "gif" || ext == "bmp")
+                    new_files.append(f);
+            }
+            else if (_fileType == 1)
+            {
+                if (ext == "mkv" || ext == "mpg" || ext == "mov" || ext == "wmv" || ext == "avi" || ext == "webm")
+                    new_files.append(f);
+            }
+        }
+    }
+    m_files = new_files;
+    endResetModel();
 }
 
 void FileList::readList() {
     beginResetModel();
-    m_files = FileStorer::readFile();
+    m_full = FileStorer::readFile();
     endResetModel();
 }
 
 void FileList::storeList() {
-    FileStorer::storeFile(m_files);
+    FileStorer::storeFile(m_full);
 }

@@ -13,6 +13,7 @@ ApplicationWindow
     MarkList{
         id: markListStorage
     }
+
     FileList {
         id: fileListStorage
     }
