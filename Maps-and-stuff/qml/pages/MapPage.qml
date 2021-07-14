@@ -137,19 +137,10 @@ Page {
                 text: "File manager"
                 color: "black"
             }
-<<<<<<< HEAD
             onClicked:
             {
                 pageStack.push("FileManager.qml");
             }
-=======
-            Component{
-                id: listPage
-                ListPage{}
-            }
-
-            onClicked: pageStack.push(listPage)
->>>>>>> 09f070cb6bc410ce033d8c5d134212d471bc8016
         }
     }
 }
