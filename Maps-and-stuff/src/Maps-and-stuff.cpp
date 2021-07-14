@@ -18,6 +18,7 @@ int main(int argc, char *argv[])
     //
     // To display the view, call "show()" (will show fullscreen on device).
 
+    qRegisterMetaType<FileList*>("FileList");
     qmlRegisterType<FileList>("MyMap", 1, 0, "FileList");
     qmlRegisterType<MarkList>("MyMap", 1, 0, "MarkList");
     return SailfishApp::main(argc, argv);

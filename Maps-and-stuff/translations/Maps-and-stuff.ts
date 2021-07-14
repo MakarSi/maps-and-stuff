@@ -4,7 +4,22 @@
 <context>
     <name>CoverPage</name>
     <message>
-        <source>My Cover</source>
+        <source>GeoTagging</source>
+        <translation type="unfinished"></translation>
+    </message>
+</context>
+<context>
+    <name>FileManager</name>
+    <message>
+        <source>Related files</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Add file</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <source>Delete all</source>
         <translation type="unfinished"></translation>
     </message>
 </context>

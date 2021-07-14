@@ -22,7 +22,7 @@ Page {
                     leftMargin: Theme.horizontalPageMargin
                     rightMargin: Theme.horizontalPageMargin
                 }
-                text: model.path
+                text: model.name
             }
 
             Component {

@@ -7,20 +7,20 @@ import QtMultimedia 5.6
 import "."
 
 Page {
-    property string path: "Anacondaz.webm"
+    property string srcFile: ""
     ProgressBar{
         anchors.bottom: video.top
         anchors.horizontalCenter: parent.horizontalCenter
         label: "%1 — %2".arg(video.metaData.author).arg(video.metaData.title)
         value: video.position
-        maximum: video.duration
+        maximumValue: video.duration
     }
     Video{
         anchors.centerIn: parent
         width: parent.width
         height: 400
         id: video
-        source: path
+        source: srcFile
         focus: true
         Keys.onSpacePressed: video.playbackState == MediaPlayer.PlayingState ? video.pause() : video.play()
         Keys.onLeftPressed: video.seek(video.position - 5000)
