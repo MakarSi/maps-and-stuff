@@ -21,7 +21,6 @@ public:
         QString name;
         QString short_name = fInfo.baseName();
         QString ext = fInfo.suffix();
-        id = id.mid(1, id.size() - 2);
         name = short_name + id + '.' + ext;
 
         QString newPath = dir + "/" + name;
