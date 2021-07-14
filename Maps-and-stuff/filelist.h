@@ -39,12 +39,12 @@ public:
         _fileType = _file;
     }
 
-    FileList(const FileList& other) : QAbstractListModel()
+    /* FileList(const FileList& other) : QAbstractListModel()
     {
         m_files = other.m_files;
         _markId = other._markId;
         _fileType = other._fileType;
-    }
+    } */
 
     // Note list
     enum FileRoles {

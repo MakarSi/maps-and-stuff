@@ -58,6 +58,10 @@ Dialog{
             height: 100
             text: "Images"
             onClicked: {
+                customFileList.filterList();
+                customFileList.markId = markEditor.markId;
+                customFileList.fileType = 0;
+                customFileList.filterList();
                 pageStack.push(fileManager, { markId: markEditor.markId,
                                               fileType: 0,
                                               src: "image.png"});
@@ -69,6 +73,10 @@ Dialog{
             height: 100
             text: "Videos"
             onClicked: {
+                customFileList.filterList();
+                customFileList.markId = markEditor.markId;
+                customFileList.fileType = 1;
+                customFileList.filterList();
                     pageStack.push(fileManager, { markId: markEditor.markId,
                                               fileType: 1,
                                               src: "video.png"});
@@ -80,6 +88,10 @@ Dialog{
             height: 100
             text: "Music"
             onClicked: {
+                customFileList.filterList();
+                customFileList.markId = markEditor.markId;
+                customFileList.fileType = 2;
+                customFileList.filterList();
                 pageStack.push(fileManager, { markId: markEditor.markId,
                                               fileType: 2,
                                               src: "music.png"});

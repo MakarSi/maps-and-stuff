@@ -10,12 +10,6 @@ Page {
     property string markId: ""
     property int fileType: -1 // 0 for photos, 1 for videos, 2 for music
     property string src: "music.png"
-    FileList{
-        id: customFileList
-        markId: myPage.markId
-        fileType: myPage.fileType
-    }
-    Component.onDestruction: console.log("asdas")
     SilicaListView {
         anchors.fill: parent
         header: PageHeader {
